@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #4a90e2 0%, #7bb3f0 50%, #a8d0f7 100%);
             min-height: 100vh;
             color: white;
         }
@@ -28,6 +28,7 @@
             text-align: center;
             margin-bottom: 30px;
             animation: fadeInDown 1s ease-out;
+            position: relative;
         }
 
         .subtitle {
@@ -49,6 +50,16 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .millennium-force-logo {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 4rem;
+            opacity: 0.6;
+            animation: bounce 2s infinite;
         }
 
         .tabs {
@@ -60,7 +71,7 @@
         }
 
         .tab-button {
-            background: linear-gradient(145deg, #ff4444, #cc0000);
+            background: linear-gradient(145deg, #3a7bd5, #2c5ca8);
             border: none;
             color: white;
             padding: 15px 30px;
@@ -74,7 +85,7 @@
         }
 
         .tab-button:hover {
-            background: linear-gradient(145deg, #ff6666, #ee2222);
+            background: linear-gradient(145deg, #5a9bf5, #3d6dc0);
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.4);
         }
@@ -106,7 +117,7 @@
 
         .section-title {
             font-size: 2.5rem;
-            color: #cc0000;
+            color: #3a7bd5;
             margin-bottom: 20px;
             text-align: center;
             font-weight: bold;
@@ -118,7 +129,7 @@
             padding: 25px;
             margin: 20px 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-left: 5px solid #cc0000;
+            border-left: 5px solid #3a7bd5;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -128,7 +139,7 @@
         }
 
         .card h3 {
-            color: #cc0000;
+            color: #3a7bd5;
             margin-bottom: 15px;
             font-size: 1.5rem;
         }
@@ -141,7 +152,7 @@
         }
 
         .btn {
-            background: linear-gradient(145deg, #cc0000, #990000);
+            background: linear-gradient(145deg, #3a7bd5, #2c5ca8);
             color: white;
             border: none;
             padding: 12px 25px;
@@ -154,7 +165,7 @@
         }
 
         .btn:hover {
-            background: linear-gradient(145deg, #ee2222, #bb0000);
+            background: linear-gradient(145deg, #5a9bf5, #3d6dc0);
             transform: translateY(-2px);
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
@@ -166,13 +177,90 @@
             margin: 30px 0;
         }
 
-        .roller-coaster {
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            margin: 10% auto;
+            padding: 40px;
+            border: none;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            color: #333;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
             position: absolute;
-            top: 10px;
             right: 20px;
-            font-size: 3rem;
-            opacity: 0.3;
-            animation: bounce 2s infinite;
+            top: 15px;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #3a7bd5;
+            text-decoration: none;
+        }
+
+        .modal h2 {
+            color: #3a7bd5;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .modal-option {
+            background: linear-gradient(145deg, #3a7bd5, #2c5ca8);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .modal-option:hover {
+            background: linear-gradient(145deg, #5a9bf5, #3d6dc0);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .cedar-fair-logo {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            color: #3a7bd5;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         @keyframes fadeInDown {
@@ -230,16 +318,23 @@
                 border-radius: 20px;
                 padding: 20px;
             }
+            .millennium-force-logo {
+                display: none;
+            }
+            .modal-content {
+                margin: 20% auto;
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="roller-coaster">🎢</div>
+    <div class="millennium-force-logo">🎢</div>
     
     <div class="container">
         <div class="header">
             <div class="subtitle">TPT2</div>
-            <h1 class="title">CEDAR POINT</h1>
+            <h1 class="subtitle" style="font-size: 4rem; margin-bottom: 20px;">CEDAR POINT</h1>
         </div>
         
         <div class="tabs">
@@ -258,33 +353,35 @@
                         <p>Skip the regular lines on most major attractions! Perfect for busy days when you want to maximize your ride time.</p>
                         <div class="price">$75</div>
                         <br>
-                        <button class="btn">Purchase Fast Lane</button>
+                        <button class="btn" onclick="showModal()">Purchase Fast Lane</button>
                     </div>
                     
                     <div class="card">
-                        <h3>Fast Lane+</h3>
-                        <p>Our premium pass includes ALL rides, including Steel Vengeance, Maverick, and SkyCoaster! The ultimate Cedar Point experience.</p>
+                        <h3>Fast Lane Plus</h3>
+                        <p>Our premium pass includes ALL rides, including Steel Vengeance, Maverick, Top Thrill 2, and Millennium Force! The ultimate Cedar Point experience.</p>
                         <div class="price">$105</div>
                         <br>
-                        <button class="btn">Purchase Fast Lane+</button>
+                        <button class="btn" onclick="showModal()">Purchase Fast Lane Plus</button>
                     </div>
                     
                     <div class="card">
-                        <h3>Single Ride Express</h3>
+                        <h3>Single Use Fast Lane</h3>
                         <p>Skip the line for one specific ride of your choice. Great for that one coaster you absolutely can't miss!</p>
                         <div class="price">$15</div>
                         <br>
-                        <button class="btn">Select Your Ride</button>
+                        <button class="btn" onclick="showModal()">Select Your Ride</button>
                     </div>
                 </div>
                 
                 <div class="card">
-                    <h3>Fast Pass Benefits</h3>
-                    <p>• Skip regular admission lines<br>
-                    • Access to dedicated Fast Pass entrances<br>
-                    • Digital pass on your mobile device<br>
-                    • Valid for one day of operation<br>
-                    • Can be used on participating attractions only</p>
+                    <h3>Fast Lane Benefits</h3>
+                    <p>• Skip the regular wait lines on participating attractions<br>
+                    • Use dedicated Fast Lane entrances for quicker access<br>
+                    • Mobile pass delivered instantly to your phone<br>
+                    • Valid for one operating day only<br>
+                    • Does not include admission to the park<br>
+                    • Limited quantities available daily<br>
+                    • Non-refundable and non-transferable</p>
                 </div>
             </div>
             
@@ -293,27 +390,21 @@
                 
                 <div class="feature-grid">
                     <div class="card">
-                        <h3>Ride Operations</h3>
-                        <p>Operate world-class roller coasters and attractions! Ensure guest safety while creating magical experiences. Training provided!</p>
-                        <button class="btn">Apply Now</button>
-                    </div>
-                    
-                    <div class="card">
                         <h3>Guest Services</h3>
                         <p>Be the friendly face guests remember! Help with questions, directions, and ensure everyone has an amazing day at the park.</p>
-                        <button class="btn">Apply Now</button>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Food & Beverage</h3>
-                        <p>Serve delicious park treats and meals! Work in our restaurants, stands, or mobile carts throughout the park.</p>
-                        <button class="btn">Apply Now</button>
+                        <button class="btn" onclick="showModal()">Apply Now</button>
                     </div>
                     
                     <div class="card">
                         <h3>Maintenance</h3>
                         <p>Keep our rides running smoothly! Join our technical team ensuring all attractions operate safely and efficiently.</p>
-                        <button class="btn">Apply Now</button>
+                        <button class="btn" onclick="showModal()">Apply Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Ride Operator</h3>
+                        <p>Operate world-class roller coasters and attractions! Ensure guest safety while creating magical experiences. Training provided!</p>
+                        <button class="btn" onclick="showModal()">Apply Now</button>
                     </div>
                 </div>
                 
@@ -337,7 +428,7 @@
                         <p>Unlimited visits to Cedar Point for the entire season! The best value for thrill seekers who want to visit multiple times.</p>
                         <div class="price">$120</div>
                         <br>
-                        <button class="btn">Get Season Pass</button>
+                        <button class="btn" onclick="showModal()">Get Season Pass</button>
                     </div>
                     
                     <div class="card">
@@ -345,21 +436,23 @@
                         <p>Access to ALL Cedar Fair parks including Cedar Point, Kings Island, Carowinds, and more! Plus free parking at every park.</p>
                         <div class="price">$200</div>
                         <br>
-                        <button class="btn">Upgrade to Platinum</button>
+                        <button class="btn" onclick="showModal()">Upgrade to Platinum</button>
                     </div>
                     
                     <div class="card">
                         <h3>VIP Experience Pass</h3>
-                        <p>Season pass PLUS unlimited Fast Lane+, preferred parking, exclusive events, and 20% off food and merchandise!</p>
+                        <p>Season pass PLUS unlimited Fast Lane Plus, preferred parking, exclusive events, and 20% off food and merchandise!</p>
                         <div class="price">$450</div>
                         <br>
-                        <button class="btn">Go VIP</button>
+                        <button class="btn" onclick="showModal()">Go VIP</button>
                     </div>
                 </div>
                 
                 <div class="card">
                     <h3>Season Pass Benefits</h3>
                     <p>• Unlimited park visits all season long<br>
+                    • Free Food Every 4 Hours<br>
+                    • Free Drink Refills Every 15 Minutes<br>
                     • Exclusive passholder events and previews<br>
                     • Discounts on food, merchandise, and games<br>
                     • Free or discounted parking (varies by pass type)<br>
@@ -376,6 +469,28 @@
                     <strong>Season Finale:</strong> January 1st<br><br>
                     <em>Season passes are valid from opening day through season finale!</em></p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Complete Your Purchase</h2>
+            <p>Choose one of the following options to complete your transaction:</p>
+            
+            <div class="modal-options">
+                <button class="modal-option" onclick="copyDiscord()">
+                    💬 DM leel_isdum on Discord
+                </button>
+                <button class="modal-option" onclick="showServiceDesk()">
+                    🏢 Visit Customer Service Desk at Park Entrance
+                </button>
+            </div>
+            
+            <div class="cedar-fair-logo">
+                CEDAR FAIR
             </div>
         </div>
     </div>
@@ -397,9 +512,36 @@
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
-        
-        function showPurchaseInfo() {
-            alert("To purchase this item:\n\n• DM leel_isdum on Discord\n• OR visit the Customer Service Desk at the front of the park\n\nThank you for choosing Cedar Point!");
+
+        function showModal() {
+            document.getElementById("purchaseModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("purchaseModal").style.display = "none";
+        }
+
+        function copyDiscord() {
+            // Try to copy to clipboard
+            navigator.clipboard.writeText("leel_isdum").then(function() {
+                alert("Discord username 'leel_isdum' copied to clipboard!");
+            }).catch(function() {
+                alert("Please message leel_isdum on Discord to complete your purchase.");
+            });
+            closeModal();
+        }
+
+        function showServiceDesk() {
+            alert("Please visit the Customer Service Desk located at the front entrance of Cedar Point to complete your purchase!");
+            closeModal();
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById("purchaseModal");
+            if (event.target == modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
