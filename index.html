@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cedar Point - TPT2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #ffd700;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .title {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ffffff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 0;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .tab-button {
+            background: linear-gradient(145deg, #ff4444, #cc0000);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 15px 15px 0 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .tab-button:hover {
+            background: linear-gradient(145deg, #ff6666, #ee2222);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(145deg, #ffd700, #ffb300);
+            color: #000;
+            text-shadow: none;
+        }
+
+        .tab-content {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 40px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            min-height: 500px;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #cc0000;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #cc0000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            color: #cc0000;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .btn {
+            background: linear-gradient(145deg, #cc0000, #990000);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            background: linear-gradient(145deg, #ee2222, #bb0000);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .roller-coaster {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.3;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            .tab-button {
+                margin-bottom: 5px;
+                border-radius: 15px;
+            }
+            .tab-content {
+                border-radius: 20px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="roller-coaster">🎢</div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="subtitle">TPT2</div>
+            <h1 class="title">CEDAR POINT</h1>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'fast-passes')">Fast Passes</button>
+            <button class="tab-button" onclick="openTab(event, 'employee')">Become An Employee</button>
+            <button class="tab-button" onclick="openTab(event, 'season-passes')">Season Passes</button>
+        </div>
+        
+        <div class="tab-content">
+            <div id="fast-passes" class="tab-pane active">
+                <h2 class="section-title">🎢 Fast Passes</h2>
+                
+                <div class="feature-grid">
+                    <div class="card">
+                        <h3>Cedar Point Fast Lane</h3>
+                        <p>Skip the regular lines on most major attractions! Perfect for busy days when you want to maximize your ride time.</p>
+                        <div class="price">$75</div>
+                        <br>
+                        <button class="btn">Purchase Fast Lane</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Fast Lane+</h3>
+                        <p>Our premium pass includes ALL rides, including Steel Vengeance, Maverick, and SkyCoaster! The ultimate Cedar Point experience.</p>
+                        <div class="price">$105</div>
+                        <br>
+                        <button class="btn">Purchase Fast Lane+</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Single Ride Express</h3>
+                        <p>Skip the line for one specific ride of your choice. Great for that one coaster you absolutely can't miss!</p>
+                        <div class="price">$15</div>
+                        <br>
+                        <button class="btn">Select Your Ride</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Fast Pass Benefits</h3>
+                    <p>• Skip regular admission lines<br>
+                    • Access to dedicated Fast Pass entrances<br>
+                    • Digital pass on your mobile device<br>
+                    • Valid for one day of operation<br>
+                    • Can be used on participating attractions only</p>
+                </div>
+            </div>
+            
+            <div id="employee" class="tab-pane">
+                <h2 class="section-title">🎪 Join Our Team</h2>
+                
+                <div class="feature-grid">
+                    <div class="card">
+                        <h3>Ride Operations</h3>
+                        <p>Operate world-class roller coasters and attractions! Ensure guest safety while creating magical experiences. Training provided!</p>
+                        <button class="btn">Apply Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Guest Services</h3>
+                        <p>Be the friendly face guests remember! Help with questions, directions, and ensure everyone has an amazing day at the park.</p>
+                        <button class="btn">Apply Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Food & Beverage</h3>
+                        <p>Serve delicious park treats and meals! Work in our restaurants, stands, or mobile carts throughout the park.</p>
+                        <button class="btn">Apply Now</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Maintenance</h3>
+                        <p>Keep our rides running smoothly! Join our technical team ensuring all attractions operate safely and efficiently.</p>
+                        <button class="btn">Apply Now</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Employee Benefits</h3>
+                    <p>• Free park admission<br>
+                    • Employee discounts on food and merchandise<br>
+                    • Flexible scheduling<br>
+                    • Career advancement opportunities<br>
+                    • Fun work environment with amazing coworkers<br>
+                    • Seasonal bonuses and incentives</p>
+                </div>
+            </div>
+            
+            <div id="season-passes" class="tab-pane">
+                <h2 class="section-title">🎠 Season Passes</h2>
+                
+                <div class="feature-grid">
+                    <div class="card">
+                        <h3>Cedar Point Season Pass</h3>
+                        <p>Unlimited visits to Cedar Point for the entire season! The best value for thrill seekers who want to visit multiple times.</p>
+                        <div class="price">$120</div>
+                        <br>
+                        <button class="btn">Get Season Pass</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Cedar Fair Platinum Pass</h3>
+                        <p>Access to ALL Cedar Fair parks including Cedar Point, Kings Island, Carowinds, and more! Plus free parking at every park.</p>
+                        <div class="price">$200</div>
+                        <br>
+                        <button class="btn">Upgrade to Platinum</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>VIP Experience Pass</h3>
+                        <p>Season pass PLUS unlimited Fast Lane+, preferred parking, exclusive events, and 20% off food and merchandise!</p>
+                        <div class="price">$450</div>
+                        <br>
+                        <button class="btn">Go VIP</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Season Pass Benefits</h3>
+                    <p>• Unlimited park visits all season long<br>
+                    • Exclusive passholder events and previews<br>
+                    • Discounts on food, merchandise, and games<br>
+                    • Free or discounted parking (varies by pass type)<br>
+                    • Early park entry on select days<br>
+                    • Bring-a-friend discount days<br>
+                    • Payment plans available</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Season Schedule</h3>
+                    <p><strong>Opening Day:</strong> May 11th<br>
+                    <strong>Halloweekends:</strong> September - October<br>
+                    <strong>WinterFest:</strong> November - December<br>
+                    <strong>Season Finale:</strong> January 1st<br><br>
+                    <em>Season passes are valid from opening day through season finale!</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabPanes, tabButtons;
+            
+            tabPanes = document.getElementsByClassName("tab-pane");
+            for (i = 0; i < tabPanes.length; i++) {
+                tabPanes[i].classList.remove("active");
+            }
+            
+            tabButtons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        function showPurchaseInfo() {
+            alert("To purchase this item:\n\n• DM leel_isdum on Discord\n• OR visit the Customer Service Desk at the front of the park\n\nThank you for choosing Cedar Point!");
+        }
+    </script>
+</body>
+</html>
